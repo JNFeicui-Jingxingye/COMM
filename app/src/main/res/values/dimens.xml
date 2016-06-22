@@ -1,0 +1,11 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <!-- 视图边距 -->
+    <dimen name="tel_show_height">140dp</dimen>
+    <dimen name="tel_show_text_size">20sp</dimen>
+    <dimen name="tel_item_height">60dp</dimen>
+    <dimen name="tel_listitem_height">30dp</dimen>
+
+</resources>

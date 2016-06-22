@@ -1,0 +1,5 @@
+<resources>
+    <!--页面命名-->
+    <string name="app_name"> 通讯大全 </string>
+    <string name="tel_title"> 一站式号码服务平台 </string>
+</resources>
