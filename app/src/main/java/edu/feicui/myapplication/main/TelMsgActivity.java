@@ -15,6 +15,7 @@ import edu.feicui.myapplication.adapter.TelClassAdapter;
 import edu.feicui.myapplication.bean.TelClassInfo;
 import edu.feicui.myapplication.db.AssetsDBManager;
 import edu.feicui.myapplication.db.DBReader;
+import edu.feicui.myapplication.entity.TelclassInfo;
 
 /**
  * 通讯录页面
@@ -28,14 +29,16 @@ public class TelMsgActivity extends AppCompatActivity implements AdapterView.OnI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tel_msg);
+
         mLvTelList = (ListView) findViewById(R.id.lv_tel_list);
         initView();
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-//      initAppDBFile();
+      initAppDBFile();
         mAdapter.clearDataToAdapter();
         mAdapter.addDataToAdapter(new TelClassInfo("本地电话",0));
         try {
@@ -47,16 +50,16 @@ public class TelMsgActivity extends AppCompatActivity implements AdapterView.OnI
     }
 
 //    数据库是否存在
-//    private void initAppDBFile() {
-//        if (DBReader.isExistsTeldbFile()){
-//            try {
-//                AssetsDBManager.copyAssetsFileToFile(getApplicationContext(),"db/commonnum.db",DBReader.telFile);
-//            } catch (IOException e) {
-//                Toast.makeText(TelMsgActivity.this,"数据库异常",Toast.LENGTH_SHORT).show();
-//                e.printStackTrace();
-//            }
-//        }
-//    }
+    private void initAppDBFile() {
+        if (DBReader.isExistsTeldbFile()){
+            try {
+                AssetsDBManager.copyAssetsFileToFile(getApplicationContext(),"db/commonnum.db",DBReader.telFile);
+            } catch (IOException e) {
+                Toast.makeText(TelMsgActivity.this,"数据库异常",Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
+        }
+    }
 
     private void initView() {
         mLvTelList = (ListView) findViewById(R.id.lv_tel_list);
@@ -70,6 +73,13 @@ public class TelMsgActivity extends AppCompatActivity implements AdapterView.OnI
         if (position==0){
             Intent intent = new Intent(Intent.ACTION_DIAL);
             startActivity(intent);
+            return;
         }
+        // 取出当前选择的选项实体内容
+        TelClassInfo classInfo = mAdapter.getItem(position);
+        // 跳转至电话浏览页面,且传入idx
+        Intent intent = new Intent(this, TellistActivity.class);
+        intent.putExtra("idx", classInfo.idx);
+        startActivity(intent);
     }
 }

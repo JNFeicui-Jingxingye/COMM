@@ -16,7 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".main.TelMsgActivity" />
-        
+        <activity android:name=".main.TellistActivity"></activity>
     </application>
 
 </manifest>
